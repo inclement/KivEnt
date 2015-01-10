@@ -271,7 +271,11 @@ class CymunkPhysics(GameSystem):
         if entity_component_dict['mass'] == 0:
             body = Body(None, None)
         else:
-            body = Body(entity_component_dict['mass'], moment)
+            if 'moment' in entity_component_dict:
+                body = Body(entity_component_dict['mass'],
+                            entity_component_dict['moment'])
+            else: 
+                body = Body(entity_component_dict['mass'], moment)
             body.velocity = entity_component_dict['velocity']
             body.angular_velocity = entity_component_dict[
                 'angular_velocity']
